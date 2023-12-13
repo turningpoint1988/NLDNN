@@ -1,6 +1,6 @@
-# FCNsignal
+# NLDNN-AT
 
-Base-resolution prediction of transcription factor binding signals by a deep learning framework. The performance of FCNsignal was evaluated on the [ChIP-seq and ATAC-seq datasets](https://www.encodeproject.org/).
+Cross-species prediction of transcription factor binding by adversarial training of a novel nucleotide-level deep neural network. The flowchart of NLDNN-AT is displayed as follows:
 
 <p align="center"> 
 <img src=https://github.com/turningpoint1988/NLDNN/blob/main/flowchart.jpg>
@@ -11,23 +11,27 @@ Base-resolution prediction of transcription factor binding signals by a deep lea
 - Pytorch 1.1 [[Install]](https://pytorch.org/)
 - CUDA 9.0
 - Python 3.6
-- Python packages: biopython, scikit-learn, pyBigWig, scipy, pandas, matplotlib, seaborn
-- Download [hg38.fa](https://hgdownload.soe.ucsc.edu/downloads.html#human) then unzip them and put them into `Genome/`
+- Python packages: biopython, scikit-learn, pyBigWig, h5py, scipy, pandas, matplotlib, seaborn
+
+## Other Tools
+
+- [MEME Suite](https://meme-suite.org/meme/doc/download.html): It assembles several methods used by this paper, including TOMTOM and FIMO.
+- [Bedtools](https://bedtools.readthedocs.io/en/latest/content/installation.html): It is a powerful toolset for genome arithmetic.
+- [TF–Modisco](https://github.com/jmschrei/tfmodisco-lite): It is a biological motif discovery algorithm that differentiates itself by using attribution scores from a machine learning model, in addition to the sequence itself, to guide motif discovery. 
+- [Captum](https://github.com/pytorch/captum): It is a model interpretability and understanding library for PyTorch
 
 ## Competing Methods
 
-- [MEME Suite](https://meme-suite.org/meme/doc/download.html): The tool integrates several methods used by this paper, including MEME, STREME, TOMTOM and FIMO.
-- [DeepCNN](https://github.com/turningpoint1988/DLBSS)
-- [DanQ](https://github.com/uci-cbcl/DanQ)
-- [FCNA\*](https://github.com/turningpoint1988/FCNA)
-- [FCNA](https://github.com/turningpoint1988/FCNsignal)
-- [BPNet](https://github.com/kundajelab/bpnet/)
-- [LSGKM](https://github.com/Dongwon-Lee/lsgkm)
-- [DeepEmbed](https://github.com/minxueric/ismb2017_lstm)
-- [Deopen](https://github.com/kimmo1019/Deopen)
-- [DeltaSVM](https://www.beerlab.org/deltasvm/)
+- Sequence-level classification models: [LSGKM](https://github.com/Dongwon-Lee/lsgkm), [DeepSea](http://deepsea.princeton.edu/), [DanQ](https://github.com/uci-cbcl/DanQ), [DanQV](https://github.com/seqcode/cross-species-domain-adaptation).
+- Sequence-level regression models: [DeepSea+](https://github.com/turningpoint1988/NLDNN), [DanQ+](https://github.com/turningpoint1988/NLDNN), [DanQV+](https://github.com/turningpoint1988/NLDNN).
+- Nucleotide-level models: [FCNA](https://github.com/turningpoint1988/FCNA), [BPNet](https://github.com/kundajelab/bpnet/), [Leopard](https://github.com/GuanLab/Leopard), [FCNA](https://github.com/turningpoint1988/FCNsignal).
 
 ## Data Preparation
+
+- Download [hg38.fa](https://hgdownload.soe.ucsc.edu/downloads.html#human) and [mm10.fa](https://hgdownload.soe.ucsc.edu/downloads.html#mouse), and put them into the `Genome` directory.
+- Download [TF binding datasets](https://www.encodeproject.org) and rename peak files as 'ChIPseq.${Species}.${Cell.TF}.idr.bed' and coverage track files as 'ChIPseq.${Species}.${Cell.TF}.pv.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell.TF} denotes the name of a cell-specific TF.
+- Download [Chromatin Accessibility datasets](https://www.encodeproject.org) and rename coverage files as '${Species}.${Cell}.chromatin.fc.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell} denote the name of a cell type.
+- Three types of SNPs are already involved in this repository. 
 
 ```
 python bed2signal.py -d <> -n <> -s <>
