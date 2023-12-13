@@ -42,9 +42,9 @@ bash annotate.sh
 DNA sequences for each cell-specific TF will be divided into the test (chr1,chr18), validation (chr8), and training (the remaining chromosomes except chrY) sets, in which all TF binding peaks (600bp) are regarded as positive sequences while sequences (600bp) that do not overlap with positive sequences and match the GC distribution of positive ones are regarded as negative sequences. 
 
 
-## Model Training
+## Stage 1: Training NLDNN on the source species
 
-Train FCNsignal models on specified datasets:
+The stage is to train NLDNN using the training set from the source species, and then evaluate NLDNN using the test set from the source or target species.
 
 ```
 python run_signal.py -d <> -n <> -g <> -s <> -b <> -e <> -c <>
