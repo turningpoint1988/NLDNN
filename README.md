@@ -28,10 +28,10 @@ Cross-species prediction of transcription factor binding by adversarial training
 
 ## Data Preparation
 
-- Download [hg38.fa](https://hgdownload.soe.ucsc.edu/downloads.html#human) and [mm10.fa](https://hgdownload.soe.ucsc.edu/downloads.html#mouse), and put them into the `Genome` directory.
-- Download [TF binding datasets](https://www.encodeproject.org) and rename peak files as 'ChIPseq.${Species}.${Cell.TF}.idr.bed' and coverage track files as 'ChIPseq.${Species}.${Cell.TF}.pv.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell.TF} denotes the name of a cell-specific TF.
-- Download [Chromatin Accessibility datasets](https://www.encodeproject.org) and rename coverage files as '${Species}.${Cell}.chromatin.fc.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell} denote the name of a cell type.
-- Three types of SNPs are already involved in this repository. 
+- Download [hg38.fa](https://hgdownload.soe.ucsc.edu/downloads.html#human) and [mm10.fa](https://hgdownload.soe.ucsc.edu/downloads.html#mouse), and then put them into the `Genome` directory.
+- Download [TF binding datasets](https://www.encodeproject.org) and rename peak files as 'ChIPseq.${Species}.${Cell.TF}.idr.bed' and coverage track files as 'ChIPseq.${Species}.${Cell.TF}.pv.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell.TF} denotes the name of a cell-specific TF, and then put them into the `Human-Mouse` directory.
+- Download [Chromatin Accessibility datasets](https://www.encodeproject.org) and rename coverage files as '${Species}.${Cell}.chromatin.fc.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell} denote the name of a cell type, and then put them into the `Chromatin` directory.
+- Three types of SNPs are already involved in this repository, pls refer to the `SNP` directory.
 
 ```
 python bed2signal.py -d <> -n <> -s <>
