@@ -33,15 +33,13 @@ Cross-species prediction of transcription factor binding by adversarial training
 - Download [Chromatin Accessibility datasets](https://www.encodeproject.org) and rename coverage files as '${Species}.${Cell}.chromatin.fc.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell} denote the name of a cell type, and then put them into the `Chromatin` directory.
 - Three types of SNPs are already involved in this repository, pls refer to the `SNP` directory.
 
+After these are finished, you can run the following shell script to prepare TF binding data.
+
 ```
-python bed2signal.py -d <> -n <> -s <>
+bash annotate.sh
 ```
 
-| Arguments   | Description                                                    |
-| ----------- | -------------------------------------------------------------- |
-| -d          | The path of datasets, e.g. /your_path/FCNsignal/HeLa-S3/CTCF   |
-| -n          | The name of the specified dataset, e.g. CTCF                   |
-| -s          | Random seed (default is 666)                                   |
+DNA sequences for each cell-specific TF will be divided into the test (chr1,chr18), validation (chr8), and training (the remaining chromosomes except chrY) sets, in which all TF binding peaks (600bp) are regarded as positive sequences while sequences (600bp) that do not overlap with positive sequences and match the GC distribution of positive ones are regarded as negative sequences. 
 
 
 ## Model Training
