@@ -1,0 +1,3 @@
+Chromatin Accessibility coverage tracks can be downloaded from ENCODE (https://www.encodeproject.org), experimental accessions for Chromatin Accessibility are listed in Supplementary Table 1.
+
+The downloaded coverage track files should be renamed as 'Human.${Cell}.chromatin.fc.bigWig', where ${Cell} denote the name of a cell type.

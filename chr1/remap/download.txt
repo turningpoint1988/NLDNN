@@ -1,0 +1,1 @@
+All integrated TF binding peaks of human and mouse species are collected from ReMap2022 (https://remap.univ-amu.fr/).

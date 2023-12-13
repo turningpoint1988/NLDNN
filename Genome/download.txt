@@ -1,0 +1,2 @@
+Human and Mouse genome sequence files can be downloaded from UCSC (https://hgdownload.soe.ucsc.edu/downloads.html), which are renamed as hg38.fa and mm10.fa, respectively.
+

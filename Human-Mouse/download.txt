@@ -1,0 +1,3 @@
+ChIP-seq TF binding datasets can be downloaded from ENCODE (https://www.encodeproject.org), experimental accessions for TF binding datasets are listed in Supplementary Table 1.
+
+The downloaded peak files should be renamed as 'ChIPseq.Human.${Cell.TF}.idr.bed', and coverage track files be renamed as 'ChIPseq.Mouse.${Cell.TF}.pv.bigWig', where ${Cell.TF} denote the name of a cell-specific TF.
