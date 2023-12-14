@@ -87,7 +87,7 @@ Fig.2 Within- and cross-species performance comparison between all models for pr
 
 All related SNPs (including TF-specific SNPs, MPRA, causal SNPs) are provided in the `SNP` directory.
 
-**Task1: TF-specific SNPs classification.** <br/>
+- **Task1: TF-specific SNPs classification.** 
 
 Perform NLDNN for this task using the following shell script:
 
