@@ -85,38 +85,47 @@ Fig.2 Within- and cross-species performance comparison between all models for pr
 
 ## Variant effect prediction
 
-All related SNPs (including TF-specific SNPs, MPRA, causal SNPs) are provided in the `SNP` directory.
+To assess the performance of NLDNN and the competing methods on variant effect prediction, three different types of tasks are constructed: classification, regression, and prioritization. All related SNPs (including TF-specific SNPs, MPRA, causal SNPs) are provided in the `SNP` directory.
 
 - **Task1: TF-specific SNPs classification.** 
 
-Perform NLDNN for this task using the following shell script:
+Perform NLDNN and NLDNN-AT for this task using the following shell script:
 
 ```
+cd SNP
 bash predict.sh
 ```
 
-Perform NLDNN-AT for this task using the following shell script:
+- **Task2: MPRA regression.** 
+
+Perform NLDNN for this task using the following python script:
 
 ```
-bash predict_at.sh
+cd SNP
+python test_mpra.py -r <> -m <>
 ```
 
+| Arguments  | Description                                                 |
+| ---------- | ---------------------------------------------------------   |
+| -r         | The path of the project, e.g., ${HOME}/NLDNN                |
+| -m         | The name of adopted model, e.g. models_NLDNN                |
 
-| Arguments  | Description                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------------- |
-| -d         | The path of a specified dataset, e.g. /your_path/FCNsignal/HeLa-S3/CTCF/data                |
-| -n         | The name of the specified dataset, e.g. CTCF                                                |
-| -g         | The GPU device id (default is 0)                                                            |
-| -t         | The threshold value (default is 0.3)                                                        |
-| -c         | The trained model path of a specified dataset, e.g. /your_path/FCNsignal/models/HeLa-S3/CTCF|
-| -o         | The path of storing motif files, e.g. /your_path/FCNsignal/motifs/HeLa-S3/CTCF              |
+- **Task3: Causal SNPs prioritization.** 
 
-### Output
+Perform NLDNN for this task using the following python script:
 
-Generate motif files in MEME format, which are subsequently used by TOMTOM.
+```
+cd SNP
+python test_causal.py -r <> -m <>
+```
+
+| Arguments  | Description                                                 |
+| ---------- | ---------------------------------------------------------   |
+| -r         | The path of the project, e.g., ${HOME}/NLDNN                |
+| -m         | The name of adopted model, e.g. models_NLDNN                |
 
 
-## Locating TFBSs
+## Localization ability
 
 Locating potential binding regions on inputs of arbitrary length:
 
