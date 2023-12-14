@@ -6,9 +6,9 @@ Cross-species prediction of transcription factor binding by adversarial training
 <img src=https://github.com/turningpoint1988/NLDNN/blob/main/flowchart.jpg>
 </p>
 
-<h3 align="center"> 
-**Fig.1 The flowchart of our proposed method (NLDNN-AT).**
-</h3>
+<h4 align="center"> 
+Fig.1 The flowchart of our proposed method (NLDNN-AT).
+</h4>
 
 ## Prerequisites and Dependencies
 
