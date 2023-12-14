@@ -73,7 +73,7 @@ Note that the above shell script includes stages 1 and 2.
 
 ## Predictive performance
 
-To compare the predictive performance of NLDNN with the competing methods, PR-AUC and Pearson correlation were adopted to separately assess the classification and fitting performance of them. The comparison scatter plot is shown as follows:
+To compare the predictive performance of NLDNN with the competing methods, PR-AUC and Pearson correlation are adopted to separately assess the classification and fitting performance of them. The comparison scatter plot is shown as follows:
 
 <p align="center"> 
 <img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/predictive.jpg width = "600" height = "500">
@@ -83,7 +83,7 @@ To compare the predictive performance of NLDNN with the competing methods, PR-AU
 Fig.2 Within- and cross-species performance comparison between all models for predicting TF binding.
 </h4>
 
-## Motif Prediction
+## Variant effect prediction
 
 Motif prediction on the specified test data:
 
