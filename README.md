@@ -76,7 +76,7 @@ Note that the above shell script includes stages 1 and 2.
 To compare the predictive performance of NLDNN with the competing methods, PR-AUC and Pearson correlation were adopted to separately assess the classification and fitting performance of them. The comparison scatter plot is shown as follows:
 
 <p align="center"> 
-<img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/predictive.jpg>
+<img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/predictive.jpg width = "200" height = "200">
 </p>
 
 <h4 align="center"> 
