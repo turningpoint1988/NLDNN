@@ -7,7 +7,7 @@ Cross-species prediction of transcription factor binding by adversarial training
 </p>
 
 <p align="center"> 
-#### Fig.1 The flowchart of our proposed method (NLDNN-AT).
+Fig.1 The flowchart of our proposed method (NLDNN-AT).
 </p>
 
 ## Prerequisites and Dependencies
@@ -46,7 +46,7 @@ bash annotate.sh
 By doing this, DNA sequences for each cell-specific TF will be divided into the test (chr1,chr18), validation (chr8), and training (the remaining chromosomes except chrY) sets, in which all TF binding peaks (600bp) are regarded as positive sequences while sequences (600bp) that do not overlap with positive sequences and match the GC distribution of positive ones are regarded as negative sequences. 
 
 
-## Stage 1: Training NLDNN on the source species
+## Stage 1: Training NLDNN on the source species (Fig.1d)
 
 The stage is to train NLDNN using the training set from the source species, and then evaluate NLDNN using the test set from the source or target species.
 
@@ -56,7 +56,7 @@ bash run.sh
 
 This execution includes a ‘warm-up’ process to select the best-initialized model, then the selected model is used as an initialized template for the training phase. 
 
-## Stage 2: 
+## Stage 2: Fine-tune NLDNN by adversarial training in the dual-path framework (Fig.1e)
 
 Trained models for FCNsignal on the specified datasets. For example, A trained model can be found at `/your_path/FCNsignal/models/HeLa-S3/CTCF/model_best.pth`.
 
