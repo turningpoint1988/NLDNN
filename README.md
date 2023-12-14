@@ -69,7 +69,7 @@ After adversarial training, the target generator and predictor were concatenated
 bash run_at.sh
 ```
 
-Note that the above shell script includes stages 1 and 2.
+Note that the above shell script includes stages 2 and 3.
 
 ## Predictive performance
 
@@ -85,11 +85,22 @@ Fig.2 Within- and cross-species performance comparison between all models for pr
 
 ## Variant effect prediction
 
-Motif prediction on the specified test data:
+All related SNPs (including TF-specific SNPs, MPRA, causal SNPs) are provided in the `SNP` directory.
+
+**Task1: TF-specific SNPs classification.** <br/>
+
+Perform NLDNN for this task using the following shell script:
 
 ```
-python motif_prediction.py -d <> -n <> -g <> -t <> -c <> -o <>
+bash predict.sh
 ```
+
+Perform NLDNN-AT for this task using the following shell script:
+
+```
+bash predict_at.sh
+```
+
 
 | Arguments  | Description                                                                                 |
 | ---------- | ------------------------------------------------------------------------------------------- |
