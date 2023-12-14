@@ -5,6 +5,9 @@ Cross-species prediction of transcription factor binding by adversarial training
 <p align="center"> 
 <img src=https://github.com/turningpoint1988/NLDNN/blob/main/flowchart.jpg>
 </p>
+<p align="center"> 
+**Fig.1 The flowchart of our proposed method (NLDNN-AT).**
+</p>
 
 ## Prerequisites and Dependencies
 
@@ -30,7 +33,7 @@ Cross-species prediction of transcription factor binding by adversarial training
 
 - Download [hg38.fa](https://hgdownload.soe.ucsc.edu/downloads.html#human) and [mm10.fa](https://hgdownload.soe.ucsc.edu/downloads.html#mouse), and then put them into the `Genome` directory.
 - Download [TF binding datasets](https://www.encodeproject.org) and rename peak files as 'ChIPseq.${Species}.${Cell.TF}.idr.bed' and coverage track files as 'ChIPseq.${Species}.${Cell.TF}.pv.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell.TF} denotes the name of a cell-specific TF, and then put them into the `Human-Mouse` directory.
-- Download [Chromatin Accessibility datasets](https://www.encodeproject.org) and rename coverage files as '${Species}.${Cell}.chromatin.fc.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell} denote the name of a cell type, and then put them into the `Chromatin` directory.
+- Download [Chromatin accessibility datasets](https://www.encodeproject.org) and rename coverage files as '${Species}.${Cell}.chromatin.fc.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell} denote the name of a cell type, and then put them into the `Chromatin` directory.
 - Three types of SNPs are already involved in this repository, pls refer to the `SNP` directory.
 
 After these are finished, you can run the following shell script to prepare TF binding data.
@@ -39,7 +42,7 @@ After these are finished, you can run the following shell script to prepare TF b
 bash annotate.sh
 ```
 
-DNA sequences for each cell-specific TF will be divided into the test (chr1,chr18), validation (chr8), and training (the remaining chromosomes except chrY) sets, in which all TF binding peaks (600bp) are regarded as positive sequences while sequences (600bp) that do not overlap with positive sequences and match the GC distribution of positive ones are regarded as negative sequences. 
+By doing this, DNA sequences for each cell-specific TF will be divided into the test (chr1,chr18), validation (chr8), and training (the remaining chromosomes except chrY) sets, in which all TF binding peaks (600bp) are regarded as positive sequences while sequences (600bp) that do not overlap with positive sequences and match the GC distribution of positive ones are regarded as negative sequences. 
 
 
 ## Stage 1: Training NLDNN on the source species
@@ -47,20 +50,12 @@ DNA sequences for each cell-specific TF will be divided into the test (chr1,chr1
 The stage is to train NLDNN using the training set from the source species, and then evaluate NLDNN using the test set from the source or target species.
 
 ```
-python run_signal.py -d <> -n <> -g <> -s <> -b <> -e <> -c <>
+bash run.sh
 ```
 
-| Arguments  | Description                                                                      |
-| ---------- | -------------------------------------------------------------------------------- |
-| -d         | The path of a specified dataset, e.g. /your_path/FCNsignal/HeLa-S3/CTCF/data     |
-| -n         | The name of the specified dataset, e.g. CTCF                                     |
-| -g         | The GPU device id (default is 0)                                                 |
-| -s         | Random seed                                                                      |
-| -b         | The number of sequences in a batch size (default is 500)                         |
-| -e         | The epoch of training steps (default is 50)                                      |
-| -c         | The path for storing models, e.g. /your_path/FCNsignal/models/HeLa-S3/CTCF       |
+This execution includes a ‘warm-up’ process to select the best-initialized model, then the selected model is used as an initialized template for the training phase. 
 
-### Output
+## Stage 2: 
 
 Trained models for FCNsignal on the specified datasets. For example, A trained model can be found at `/your_path/FCNsignal/models/HeLa-S3/CTCF/model_best.pth`.
 
