@@ -89,7 +89,7 @@ To assess the performance of NLDNN and the competing methods on variant effect p
 
 - **Task1: TF-specific SNPs classification.** 
 
-Perform NLDNN and NLDNN-AT for this task using the following shell script:
+Models are trained using ChIP-seq TF binding datasets, and then used to evaluate their performance on the task by the following shell script:
 
 ```
 cd SNP
@@ -98,50 +98,73 @@ bash predict.sh
 
 - **Task2: MPRA regression.** 
 
-Perform NLDNN for this task using the following python script:
+Models are trained using related chromatin accessibility data, and then used to evaluate their performance on the task by the following python script:
 
 ```
 cd SNP
 python test_mpra.py -r <> -m <>
 ```
 
-| Arguments  | Description                                                 |
-| ---------- | ---------------------------------------------------------   |
-| -r         | The path of the project, e.g., ${HOME}/NLDNN                |
-| -m         | The name of adopted model, e.g. models_NLDNN                |
+| Arguments  | Description                                                               |
+| ---------- | -----------------------------------------------------------------------   |
+| -r         | The path of the project, e.g., ${HOME}/NLDNN                              |
+| -m         | The name of saved models on a specific cell, e.g. models_NLDNN_GM12878    |
 
 - **Task3: Causal SNPs prioritization.** 
 
-Perform NLDNN for this task using the following python script:
+Models are trained using chromatin accessibility data (GM12878), and then used to evaluate their performance on the task by the following python script:
 
 ```
 cd SNP
 python test_causal.py -r <> -m <>
 ```
 
-| Arguments  | Description                                                 |
-| ---------- | ---------------------------------------------------------   |
-| -r         | The path of the project, e.g., ${HOME}/NLDNN                |
-| -m         | The name of adopted model, e.g. models_NLDNN                |
+| Arguments  | Description                                                               |
+| ---------- | -----------------------------------------------------------------------   |
+| -r         | The path of the project, e.g., ${HOME}/NLDNN                              |
+| -m         | The name of saved models on a specific cell, e.g. models_NLDNN_GM12878    |
+
+## Visualization of the contribution scores of SNPs
+
+Firstly, the contribution scores of SNPs are computed using the following shell script:
+
+```
+cd SNP
+bash contrib.sh
+```
+Secondly, the predictions and contributions of each SNP (ref and alt sequences) are visualized through the following shell script:
+
+```
+cd SNP
+bash visualization.sh
+```
+
+An example is shown as follows:
+
+<p align="center"> 
+<img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/SNP.jpg>
+</p>
 
 
 ## Localization ability
 
-Locating potential binding regions on inputs of arbitrary length:
+Given that nucleotide-level models all have the ability to locate potential TF binding regions, so only nucleotide-level models are compared. <br/>
+Firstly, Chromosome 1 is segmented into non-overlapping windows of 600bp using the following shell script:
 
 ```
-python TFBS_locating.py -i <> -n <> -g <> -t <> -w <> -c <>
+cd chr1
+bash make_windows.sh
 ```
-| Arguments  | Description                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------------- |
-| -i         | The input file in bed format, e.g. /your_path/FCNsignal/input.bed                           |
-| -n         | The name of the specified dataset, e.g. CTCF                                                |
-| -g         | The GPU device id (default is 0)                                                            |
-| -t         | The threshold value to determine the binding regions (default is 1.5)                       |
-| -w         | The length of the binding regions (default is 60)                                           |
-| -c         | The trained model path of a specified dataset, e.g. /your_path/FCNsignal/models/HeLa-S3/CTCF|
 
-### Output
+Secondly, DNA sequences are encoded into one-hot matrics, and trained models take one-hot matrics as input and output their predicted coverage values. Through the maximums of the predicted coverage values, we can exactly know their positions on chromosomes.
+To evaluate the performance of nucleotide-level models for locating TF binding regions, a direct way and an indirect way are used.
+
+```
+cd chr1
+bash locating.sh
+```
+
+## Output
 
 The outputs include the base-resolution prediction of inputs and the position of potential binding regions in the genome (bed format). <br/>
 We also provide the line plots of the above base-resolutiion prediction. For example:
