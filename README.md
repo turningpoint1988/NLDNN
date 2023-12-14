@@ -1,6 +1,7 @@
 # NLDNN-AT
 
-Cross-species prediction of transcription factor binding by adversarial training of a novel nucleotide-level deep neural network. The flowchart of NLDNN-AT is displayed as follows:
+**Cross-species prediction of transcription factor binding by adversarial training of a novel nucleotide-level deep neural network.** <br/>
+The flowchart of NLDNN-AT is displayed as follows:
 
 <p align="center"> 
 <img src=https://github.com/turningpoint1988/NLDNN/blob/main/flowchart.jpg>
