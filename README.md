@@ -6,9 +6,9 @@ Cross-species prediction of transcription factor binding by adversarial training
 <img src=https://github.com/turningpoint1988/NLDNN/blob/main/flowchart.jpg>
 </p>
 
-<p align="center"> 
-Fig.1 The flowchart of our proposed method (NLDNN-AT).
-</p>
+<h3 align="center"> 
+**Fig.1 The flowchart of our proposed method (NLDNN-AT).**
+</h3>
 
 ## Prerequisites and Dependencies
 
@@ -56,13 +56,17 @@ bash run.sh
 
 This execution includes a ‘warm-up’ process to select the best-initialized model, then the selected model is used as an initialized template for the training phase. 
 
-## Stage 2: Fine-tune NLDNN by adversarial training in the dual-path framework (Fig.1e)
+## Stage 2: Fine-tune NLDNN by adversarial training in a dual-path framework (Fig.1e)
 
-Trained models for FCNsignal on the specified datasets. For example, A trained model can be found at `/your_path/FCNsignal/models/HeLa-S3/CTCF/model_best.pth`.
+This stage is performed in a dual-path framework where the top path contains a source generator for generating feature mappings from the source species while the bottom path contains a target generator for generating feature mappings from the target species, on top of which a discriminator is appended to discriminate the source and target species.
 
-## Model Classification
+```
+bash run_at.sh
+```
 
-Test FCNsignal on the specified test data:
+## Stage 3: Test NLDNN on the target species (Fig.1f)
+
+After adversarial training, as shown in Fig.1f, the target generator and predictor were concatenated to predict the coverage values of the test set from the target species.. 
 
 ```
 python test_signal.py -d <> -n <> -g <> -c <>
