@@ -4,7 +4,7 @@
 The flowchart of NLDNN-AT is displayed as follows:
 
 <p align="center"> 
-<img src=https://github.com/turningpoint1988/NLDNN/blob/main/flowchart.jpg>
+<img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/flowchart.jpg>
 </p>
 
 <h4 align="center"> 
@@ -71,9 +71,17 @@ bash run_at.sh
 
 Note that the above shell script includes stages 1 and 2.
 
-### Predictive performance
+## Predictive performance
 
-Generate `record.txt` indicating the mean squared error (MSE), the pearson correlation coefficient (Pearsonr), the area under the receiver operating characteristic curve (AUC) and the area under the precision-recall curve (PRAUC) of the trained model in predicting binding signals on the test data.
+To compare the predictive performance of NLDNN with the competing methods, PR-AUC and Pearson correlation were adopted to separately assess the classification and fitting performance of them. The comparison scatter plot is shown as follows:
+
+<p align="center"> 
+<img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/predictive performance.jpg>
+</p>
+
+<h4 align="center"> 
+Fig.2 Within- and cross-species performance comparison between all models for predicting TF binding.
+</h4>
 
 ## Motif Prediction
 
