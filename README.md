@@ -7,14 +7,14 @@ Cross-species prediction of transcription factor binding by adversarial training
 </p>
 
 <p align="center"> 
-**Fig.1 The flowchart of our proposed method (NLDNN-AT).**
+#### Fig.1 The flowchart of our proposed method (NLDNN-AT).
 </p>
 
 ## Prerequisites and Dependencies
 
 - Pytorch 1.1 [[Install]](https://pytorch.org/)
 - CUDA 9.0
-- **Python 3.6**
+- Python 3.6
 - Python packages: biopython, scikit-learn, pyBigWig, h5py, scipy, pandas, matplotlib, seaborn
 
 ## Other Tools
