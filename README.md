@@ -61,26 +61,17 @@ This execution includes a ‘warm-up’ process to select the best-initialized m
 
 This stage is performed in a dual-path framework where the top path contains a source generator for generating feature mappings from the source species while the bottom path contains a target generator for generating feature mappings from the target species, on top of which a discriminator is appended to discriminate the source and target species.
 
+## Stage 3: Test NLDNN on the target species (Fig.1f)
+
+After adversarial training, the target generator and predictor were concatenated to predict the coverage values of the test set from the target species.. 
+
 ```
 bash run_at.sh
 ```
 
-## Stage 3: Test NLDNN on the target species (Fig.1f)
+Note that the above shell script includes stages 1 and 2.
 
-After adversarial training, as shown in Fig.1f, the target generator and predictor were concatenated to predict the coverage values of the test set from the target species.. 
-
-```
-python test_signal.py -d <> -n <> -g <> -c <>
-```
-
-| Arguments  | Description                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------------- |
-| -d         | The path of a specified dataset, e.g. /your_path/FCNsignal/HeLa-S3/CTCF/data                |
-| -n         | The name of the specified dataset, e.g. CTCF                                                |
-| -g         | The GPU device id (default is 0)                                                            |
-| -c         | The trained model path of a specified dataset, e.g. /your_path/FCNsignal/models/HeLa-S3/CTCF|
-
-### Output
+### Predictive performance
 
 Generate `record.txt` indicating the mean squared error (MSE), the pearson correlation coefficient (Pearsonr), the area under the receiver operating characteristic curve (AUC) and the area under the precision-recall curve (PRAUC) of the trained model in predicting binding signals on the test data.
 
