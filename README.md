@@ -14,7 +14,7 @@ Cross-species prediction of transcription factor binding by adversarial training
 
 - Pytorch 1.1 [[Install]](https://pytorch.org/)
 - CUDA 9.0
-- Python 3.6
+- **Python 3.6**
 - Python packages: biopython, scikit-learn, pyBigWig, h5py, scipy, pandas, matplotlib, seaborn
 
 ## Other Tools
