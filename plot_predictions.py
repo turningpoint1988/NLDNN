@@ -17,6 +17,7 @@ import seaborn as sns
 # custom functions defined by user
 from model import NLDNN, Generator, Predictor
 from datasets import SourceDataSet, TargetDataSet
+import params
 
 WINDOW = 100000
 
@@ -174,9 +175,9 @@ def get_args():
 def main():
     args = get_args()
     name = args.name
-    device = torch.device('cuda:0')
-    src_dataset = 'Human'
-    tgt_dataset = 'Mouse'
+    device = params.device
+    src_dataset = params.src_dataset
+    tgt_dataset = params.tgt_dataset
     if not osp.exists(osp.join(args.root, 'chr1/100kb/{}'.format(name))):
         os.makedirs(osp.join(args.root, 'chr1/100kb/{}'.format(name)))
     if not osp.exists(osp.join(args.root, 'chr1/100kb/{}/Human.chr1.hdf5'.format(name))):
