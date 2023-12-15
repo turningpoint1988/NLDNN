@@ -167,14 +167,21 @@ bash locating.sh
 ## Visualization of outputs
 
 Although NLDNN is trained using DNA sequences of length 600bp, it can accept inputs of arbitrary length and predict each nucleotide’s value. Therefore, we segment chromosome 1 into non-overlapping regions of length 100kb <br/>
-- **Visualization of contributions.**  The contributions of each peak in these regions could be visualized using the following shell script.
+- **Visualization of contributions.**  The contributions and ISSM values of each peak in these regions could be visualized using the following shell script.
 - **Visualization of predictions.**  The true coverage values of these regions (100kb) and corresponding predicted values obtained through human, mouse and mouse-adaptation models could be visualized using the same script.
 
 ```
 bash plot.sh
 ```
 
-An example of a human genomic region (chr1:15600000-15700000, 100kb) is displayed as follows:
+An example of the contributions and ISSM values of a peak from a human genomic region (chr1:117600000-117700000, 100kb) is displayed as follows:
+
+<p align="center"> 
+<img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/Contrib.ISSM.jpg>
+</p>
+
+
+An example of predictions of a human genomic region (chr1:15600000-15700000, 100kb) is displayed as follows:
 
 <p align="center"> 
 <img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/prediction.jpg>
