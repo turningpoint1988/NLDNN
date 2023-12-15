@@ -168,6 +168,65 @@ def lineplot(df, peak, bed, out_f):
     plt.savefig(out_f, format='png', bbox_inches='tight', dpi=300)
 
 
+##### ISSM
+def plotheatmap(data, out_f):
+    fig = plt.figure(figsize=(20, 2))
+    sns.set_theme(style="white")
+    sns.heatmap(data, linewidths=.2, xticklabels=False, yticklabels=False, cmap='RdBu_r', center=0, cbar=False,
+                square=False, cbar_kws={"fraction": 0.01})
+    plt.savefig(out_f, format='png', bbox_inches='tight', dpi=300)
+    plt.close(fig)
+
+
+def Reencode(array):
+    if array[0] == 1:
+        nucleotide = 'A'
+    elif array[1] == 1:
+        nucleotide = 'C'
+    elif array[2] == 1:
+        nucleotide = 'G'
+    elif array[3] == 1:
+        nucleotide = 'T'
+    else:
+        nucleotide = 'N'
+
+    return nucleotide
+
+
+def in_silo(seq, model, out_f):
+    window = 21
+    seq_len = 200
+    pos_dict = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+    row, col = seq.shape
+    score = np.zeros((row, col))
+    for i in range(col):
+        nucleotides = ['A', 'C', 'G', 'T']
+        ref = Reencode(seq[:, i])
+        if ref == 'N':
+            continue
+        score[pos_dict[ref], i] = 0
+        nucleotides.remove(ref)
+        data_temp = deepcopy(seq)
+        for alt in nucleotides:
+            data_temp[:, i] = np.zeros(row)
+            data_temp[pos_dict[alt], i] = 1
+            x_data_alt = torch.from_numpy(data_temp)
+            x_data_alt = x_data_alt.view(1, row, col).float().to(params.device)
+            x_data_ref = torch.from_numpy(seq)
+            x_data_ref = x_data_ref.view(1, row, col).float().to(params.device)
+            with torch.no_grad():
+                pred_ref = model(x_data_ref)
+                pred_alt = model(x_data_alt)
+            pred_ref = pred_ref.view(-1).data.cpu().numpy()
+            pred_alt = pred_alt.view(-1).data.cpu().numpy()
+            position = seq_len // 2
+            effect = np.sum(np.abs(pred_ref[(position - window // 2):(position + window // 2)] -
+                                   pred_alt[(position - window // 2):(position + window // 2)]))
+            score[pos_dict[alt], i] = effect
+
+    plotheatmap(score, out_f)
+
+
 def get_args():
     """Parse all the arguments.
 
