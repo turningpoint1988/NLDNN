@@ -191,7 +191,7 @@ def main():
     device = params.device
     name = args.name
     if not osp.exists(osp.join(args.root, 'chr1/100kb/{}'.format(name))):
-        os.makedirs(osp.join(args.root, 'chr1/100kb/{}'.format(args.name)))
+        os.makedirs(osp.join(args.root, 'chr1/100kb/{}'.format(name)))
     if not osp.exists(osp.join(args.root, 'chr1/100kb/{}/Human.chr1.hdf5'.format(name))):
         chrom_size_file = osp.join(args.root, 'Genome/hg38.chrom1.size')
         windows_out = osp.join(args.root, 'chr1/100kb/{}/Human_chr1_100kb.bed'.format(name))
