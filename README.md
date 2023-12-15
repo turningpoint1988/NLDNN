@@ -164,11 +164,18 @@ cd chr1
 bash locating.sh
 ```
 
-## Output
+## Visualization of outputs
 
-The outputs include the base-resolution prediction of inputs and the position of potential binding regions in the genome (bed format). <br/>
-We also provide the line plots of the above base-resolutiion prediction. For example:
+Although NLDNN is trained using DNA sequences of length 600bp, it can accept inputs of arbitrary length and predict each nucleotide’s value. Therefore, we segment chromosome 1 into non-overlapping regions of length 100kb <br/>
+- **Visualization of contributions.**  The contributions of each peak in these regions could be visualized using the following shell script.
+- **Visualization of predictions.**  The true coverage values of these regions (100kb) and corresponding predicted values obtained through human, mouse and mouse-adaptation models could be visualized using the same script.
+
+```
+bash plot.sh
+```
+
+An example of a human genomic region (chr1:48200000-48300000, 100kb) is displayed as follows:
 
 <p align="center"> 
-<img src=https://github.com/turningpoint1988/FCNsignal/blob/main/output.jpg>
+<img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/prediction.jpg>
 </p>
