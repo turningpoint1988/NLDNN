@@ -21,6 +21,90 @@ from datasets import SourceDataSet, TargetDataSet
 WINDOW = 100000
 
 
+def one_hot(seq):
+    seq_dict = {'A':[1, 0, 0, 0], 'G':[0, 0, 1, 0],
+                'C':[0, 1, 0, 0], 'T':[0, 0, 0, 1],
+                'a':[1, 0, 0, 0], 'g':[0, 0, 1, 0],
+                'c':[0, 1, 0, 0], 't':[0, 0, 0, 1]}
+    temp = []
+    for c in seq:
+        temp.append(seq_dict.get(c, [0, 0, 0, 0]))
+    return temp
+
+
+def getbigwig(file, chrom, start, end):
+    bw = pyBigWig.open(file)
+    sample = np.array(bw.values(chrom, start, end))
+    bw.close()
+    return sample
+
+
+# save data in hdf5 format
+def outputHDF5(data, signal, peak, bed, filename):
+    comp_kwargs = {'compression': 'gzip', 'compression_opts': 1}
+    with h5py.File(filename, 'w') as f:
+        f.create_dataset('data', data=data, **comp_kwargs)
+        f.create_dataset('signal', data=signal, **comp_kwargs)
+        f.create_dataset('peak', data=peak, **comp_kwargs)
+        f.create_dataset('bed', data=bed, **comp_kwargs)
+
+
+def encode(keys, windows_dict, outfile, sequence_dict, signal_file):
+    data_all = []
+    signal_all = []
+    peak_all = []
+    bed_all = []
+    for key in keys:
+        key_split = key.split('-')
+        chrom = key_split[0]
+        start = int(key_split[1])
+        end = int(key_split[2])
+        if end -start < WINDOW:
+            continue
+        bed_all.append([start, end])
+        seq = str(sequence_dict[chrom].seq[start:end])
+        data = one_hot(seq)
+        data_all.append(data)
+        signal = getbigwig(signal_file, chrom, start, end)
+        signal[np.isnan(signal)] = 0.
+        signal_all.append(signal)
+        beds = windows_dict[key]
+        peak = np.zeros(WINDOW)
+        for bed in beds:
+            bed_split = bed.split('-')
+            start_o = int(bed_split[1]) - start
+            end_o = int(bed_split[2]) - start
+            peak[start_o:end_o] = 1
+        peak_all.append(peak)
+
+    data_all = np.array(data_all, dtype=np.float32)
+    data_all = data_all.transpose((0, 2, 1))
+    # signal_all = [[x] for x in signal_all]
+    signal_all = np.array(signal_all, dtype=np.float32)
+    signal_all = np.log10(1 + signal_all)
+    peak_all = np.array(peak_all, dtype=np.float32)
+    bed_all = np.array(bed_all, dtype=np.uint32)
+    outputHDF5(data_all, signal_all, peak_all, bed_all, outfile)
+
+
+def relocation(start, end, seq_len, window=100000):
+    original_len = end - start
+    if original_len < seq_len:
+        start_update = start - np.ceil((seq_len - original_len) / 2)
+    elif original_len > seq_len:
+        start_update = start + np.ceil((original_len - seq_len) / 2)
+    else:
+        start_update = start
+    if start_update < 0:
+        start_update = 0
+    end_update = start_update + seq_len
+    if end_update > window:
+        end_update = window
+        start_update = end_update - seq_len
+
+    return int(start_update), int(end_update)
+
+
 def lineplot(df, peak, bed, out_f):
     sns.set_theme(style="ticks")
     fig, ax = plt.subplots()
@@ -68,42 +152,6 @@ def lineplot(df, peak, bed, out_f):
     plt.savefig(out_f, format='png', bbox_inches='tight', dpi=300)
 
 
-def one_hot(seq):
-    seq_dict = {'A':[1, 0, 0, 0], 'G':[0, 0, 1, 0],
-                'C':[0, 1, 0, 0], 'T':[0, 0, 0, 1],
-                'a':[1, 0, 0, 0], 'g':[0, 0, 1, 0],
-                'c':[0, 1, 0, 0], 't':[0, 0, 0, 1]}
-    temp = []
-    for c in seq:
-        temp.append(seq_dict.get(c, [0, 0, 0, 0]))
-    return temp
-
-
-def getbigwig(file, chrom, start, end):
-    bw = pyBigWig.open(file)
-    sample = np.array(bw.values(chrom, start, end))
-    bw.close()
-    return sample
-
-
-def relocation(start, end, seq_len, window=100000):
-    original_len = end - start
-    if original_len < seq_len:
-        start_update = start - np.ceil((seq_len - original_len) / 2)
-    elif original_len > seq_len:
-        start_update = start + np.ceil((original_len - seq_len) / 2)
-    else:
-        start_update = start
-    if start_update < 0:
-        start_update = 0
-    end_update = start_update + seq_len
-    if end_update > window:
-        end_update = window
-        start_update = end_update - seq_len
-
-    return int(start_update), int(end_update)
-
-
 def get_args():
     """Parse all the arguments.
 
@@ -125,10 +173,42 @@ def get_args():
 
 def main():
     args = get_args()
+    name = args.name
     device = torch.device('cuda:0')
     src_dataset = 'Human'
     tgt_dataset = 'Mouse'
-    with h5py.File(osp.join(args.root, 'chr1/100kb/{}/{}.chr1.hdf5'.format(args.name, src_dataset)), 'r') as f:
+    if not osp.exists(osp.join(args.root, 'chr1/100kb/{}'.format(name))):
+        os.makedirs(osp.join(args.root, 'chr1/100kb/{}'.format(name)))
+    if not osp.exists(osp.join(args.root, 'chr1/100kb/{}/Human.chr1.hdf5'.format(name))):
+        chrom_size_file = osp.join(args.root, 'Genome/hg38.chrom1.size')
+        windows_out = osp.join(args.root, 'chr1/100kb/{}/Human_chr1_100kb.bed'.format(name))
+        os.system('bedtools makewindows -g {} -w {} -s {} >'
+                  ' {}'.format(chrom_size_file, WINDOW, WINDOW, windows_out))
+        chipseq_file = osp.join(args.root, 'Human-Mouse/{}/ChIPseq.Human.{}.idr.bed'.format(name, name))
+        signal_file = osp.join(args.root, 'Human-Mouse/{}/ChIPseq.Human.{}.pv.bigWig'.format(name, name))
+        overlap_out = osp.join(args.root, 'chr1/100kb/{}/Human_chr1_100kb_overlap.bed'.format(name))
+        os.system('bedtools intersect -wa -wb -a {} -b {} > {}'.format(windows_out, chipseq_file, overlap_out))
+        keys, windows_dict = readfile(overlap_out)
+        outfile = osp.join(args.root, 'chr1/100kb/{}/Human.chr1.hdf5'.format(name))
+        genomefile = args.root + '/Genome/hg38.fa'
+        sequence_dict = SeqIO.to_dict(SeqIO.parse(open(genomefile), 'fasta'))
+        encode(keys, windows_dict, outfile, sequence_dict, signal_file)
+    if not osp.exists(osp.join(args.root, 'chr1/100kb/{}/Mouse.chr1.hdf5'.format(name))):
+        chrom_size_file = osp.join(args.root, 'Genome/mm10.chrom1.size')
+        windows_out = osp.join(args.root, 'chr1/100kb/{}/Mouse_chr1_100kb.bed'.format(name))
+        os.system('bedtools makewindows -g {} -w {} -s {} >'
+                  ' {}'.format(chrom_size_file, WINDOW, WINDOW, windows_out))
+        chipseq_file = osp.join(args.root, 'Human-Mouse/{}/ChIPseq.Mouse.{}.idr.bed'.format(name, name))
+        signal_file = osp.join(args.root, 'Human-Mouse/{}/ChIPseq.Mouse.{}.pv.bigWig'.format(name, name))
+        overlap_out = osp.join(args.root, 'chr1/100kb/{}/Mouse_chr1_100kb_overlap.bed'.format(name))
+        os.system('bedtools intersect -wa -wb -a {} -b {} > {}'.format(windows_out, chipseq_file, overlap_out))
+        keys, windows_dict = readfile(overlap_out)
+        outfile = osp.join(args.root, 'chr1/100kb/{}/Mouse.chr1.hdf5'.format(name))
+        genomefile = args.root + '/Genome/mm10.fa'
+        sequence_dict = SeqIO.to_dict(SeqIO.parse(open(genomefile), 'fasta'))
+        encode(keys, windows_dict, outfile, sequence_dict, signal_file)
+    
+    with h5py.File(osp.join(args.root, 'chr1/100kb/{}/{}.chr1.hdf5'.format(name, src_dataset)), 'r') as f:
         Data = np.array(f['data'], dtype=np.float32)
         signal_t = np.array(f['signal'], dtype=np.float32)
         peak = np.array(f['peak'], dtype=np.float32)
@@ -136,9 +216,9 @@ def main():
 
     test_loader = DataLoader(TargetDataSet(Data), batch_size=1, shuffle=False, num_workers=0)
     # # source for source
-    print("{}: {} for {}".format(args.name, src_dataset, src_dataset))
+    print("{}: {} for {}".format(name, src_dataset, src_dataset))
     # Load weights
-    src_file = osp.join(args.root, args.model, args.name, '{}.model.best.pth'.format(src_dataset))
+    src_file = osp.join(args.root, args.model, name, '{}.model.best.pth'.format(src_dataset))
     chk = torch.load(src_file)
     state_dict = chk['model_state_dict']
     model = NLDNN(dim=4, motiflen=20)
@@ -154,9 +234,9 @@ def main():
         signal_ps.append(pred)
     signal_ps = np.array(signal_ps)
     #
-    print("{}: {} for {}".format(args.name, tgt_dataset, src_dataset))
+    print("{}: {} for {}".format(name, tgt_dataset, src_dataset))
     # Load weights
-    tgt_file = osp.join(args.root, args.model, args.name, '{}.model.best.pth'.format(tgt_dataset))
+    tgt_file = osp.join(args.root, args.model, name, '{}.model.best.pth'.format(tgt_dataset))
     chk = torch.load(tgt_file)
     state_dict = chk['model_state_dict']
     model = NLDNN(dim=4, motiflen=20)
@@ -173,9 +253,9 @@ def main():
         signal_pt.append(pred)
     signal_pt = np.array(signal_pt)
     #
-    print("{}: {} Adaptation for {}".format(args.name, tgt_dataset, src_dataset))
+    print("{}: {} Adaptation for {}".format(name, tgt_dataset, src_dataset))
     # # Load weights
-    tgt_generator_file = osp.join(args.root, args.model, args.name, '{}.tgt.generator.pth'.format(tgt_dataset))
+    tgt_generator_file = osp.join(args.root, args.model, name, '{}.tgt.generator.pth'.format(tgt_dataset))
     chk = torch.load(tgt_generator_file)
     state_dict = chk['model_state_dict']
     tgt_generator = Generator(dim=4, motiflen=20)
@@ -183,7 +263,7 @@ def main():
     tgt_generator.to(device)
     tgt_generator.eval()
     #
-    src_predictor_file = osp.join(args.root, args.model, args.name, '{}.src.predictor.pth'.format(tgt_dataset))
+    src_predictor_file = osp.join(args.root, args.model, name, '{}.src.predictor.pth'.format(tgt_dataset))
     chk = torch.load(src_predictor_file)
     state_dict = chk['model_state_dict']
     src_predictor = Predictor(size=WINDOW)
@@ -202,7 +282,7 @@ def main():
     # plot
     index = 0  # appoint a DNA region (100kb)
     for t, ps, pt, at, pk, b in zip(signal_t, signal_ps, signal_pt, signal_at, peak, bed):
-        out_f = osp.join(args.root, 'chr1/100kb/{}/cross_{}.png'.format(args.name, index))
+        out_f = osp.join(args.root, 'chr1/100kb/{}/cross_{}.png'.format(name, index))
         type = ['True'] * len(t) + ['Human'] * len(ps) + ['Mouse'] * len(pt) + ['Adaptation'] * len(at)
         x = list(range(WINDOW)) * 4
         value = np.concatenate((t, ps, pt, at))
