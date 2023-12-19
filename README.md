@@ -13,10 +13,10 @@ Fig.1 The flowchart of our proposed method (NLDNN-AT).
 
 ## Prerequisites and Dependencies
 
-- Pytorch 1.7 [[Install]](https://pytorch.org/)
-- CUDA 9.2
+- [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/)
 - Python 3.6.13
-- Miniconda
+- [Pytorch 1.7](https://pytorch.org/)
+- [CUDA 9.2](https://developer.nvidia.com/cuda-92-download-archive)
 - Python packages: biopython, scikit-learn, pyBigWig, h5py, scipy, pandas, matplotlib, seaborn
 
 Install by runing:
