@@ -16,6 +16,7 @@ Fig.1 The flowchart of our proposed method (NLDNN-AT).
 - Pytorch 1.7 [[Install]](https://pytorch.org/)
 - CUDA 9.2
 - Python 3.6.13
+- Miniconda
 - Python packages: biopython, scikit-learn, pyBigWig, h5py, scipy, pandas, matplotlib, seaborn
 
 Install by runing:
