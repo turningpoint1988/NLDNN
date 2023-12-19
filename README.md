@@ -38,6 +38,12 @@ Fig.1 The flowchart of our proposed method (NLDNN-AT).
 - Download [Chromatin accessibility datasets](https://www.encodeproject.org) and rename coverage files as '${Species}.${Cell}.chromatin.fc.bigWig', where ${Species} denotes the species of Human or Mouse and ${Cell} denote the name of a cell type, and then put them into the `Chromatin` directory.
 - Three types of SNPs are already involved in this repository, pls refer to the `SNP` directory.
 
+You can download related ChIP-seq TF binding datasets using the following shell script:
+
+```
+bash download.sh
+```
+
 After these are finished, you can run the following shell script to prepare TF binding data.
 
 ```
