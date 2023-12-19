@@ -1,0 +1,103 @@
+Human.Lymphoblast.BHLHE40.idr  ENCFF620MJF   bed.gz
+Mouse.Lymphoblast.BHLHE40.idr  ENCFF990PGN  bed.gz
+Human.Lymphoblast.BHLHE40.pv  ENCFF325FDI   bigWig
+Mouse.Lymphoblast.BHLHE40.pv  ENCFF229EVK  bigWig
+
+Human.Lymphoblast.CTCF.idr  ENCFF796WRU   bed.gz
+Mouse.Lymphoblast.CTCF.idr  ENCFF494WBT  bed.gz
+Human.Lymphoblast.CTCF.pv  ENCFF637RGD  bigWig
+Mouse.Lymphoblast.CTCF.pv  ENCFF255NVD  bigWig
+
+Human.Lymphoblast.E2F4.idr  ENCFF629TVV   bed.gz
+Mouse.Lymphoblast.E2F4.idr  ENCFF356FSG  bed.gz
+Human.Lymphoblast.E2F4.pv  ENCFF337MYH   bigWig
+Mouse.Lymphoblast.E2F4.pv  ENCFF244CAE  bigWig
+
+Human.Lymphoblast.JUND.idr  ENCFF825BIG   bed.gz
+Mouse.Lymphoblast.JUND.idr  ENCFF204CSB  bed.gz
+Human.Lymphoblast.JUND.pv  ENCFF948QYK   bigWig
+Mouse.Lymphoblast.JUND.pv  ENCFF084GYC  bigWig
+
+Human.Lymphoblast.MYC.idr  ENCFF765CKK   bed.gz
+Mouse.Lymphoblast.MYC.idr  ENCFF512CZX  bed.gz
+Human.Lymphoblast.MYC.pv  ENCFF829AJS   bigWig
+Mouse.Lymphoblast.MYC.pv  ENCFF901VFB  bigWig
+
+Human.Erythroid.BHLHE40.idr    ENCFF242BDT bed.gz
+Mouse.Erythroid.BHLHE40.idr  ENCFF142EEN  bed.gz
+Human.Erythroid.BHLHE40.pv  ENCFF110ZZE bigWig
+Mouse.Erythroid.BHLHE40.pv  ENCFF414CZA bigWig
+
+Human.Erythroid.CTCF.idr  ENCFF871HJT  bed.gz
+Mouse.Erythroid.CTCF.idr  ENCFF393REY  bed.gz
+Human.Erythroid.CTCF.pv ENCFF268ZPN bigWig
+Mouse.Erythroid.CTCF.pv ENCFF852JDS bigWig
+
+Human.Erythroid.E2F4.idr    ENCFF048ZIY bed.gz
+Mouse.Erythroid.E2F4.idr  ENCFF350EXY  bed.gz
+Human.Erythroid.E2F4.pv  ENCFF172BRS bigWig
+Mouse.Erythroid.E2F4.pv  ENCFF927MMJ bigWig
+
+Human.Erythroid.GATA1.idr  ENCFF221OWW  bed.gz
+Mouse.Erythroid.GATA1.idr  ENCFF024CYR  bed.gz
+Human.Erythroid.GATA1.pv ENCFF331URE bigWig
+Mouse.Erythroid.GATA1.pv ENCFF222HZM bigWig
+
+Human.Erythroid.JUND.idr  ENCFF471YUP  bed.gz
+Mouse.Erythroid.JUND.idr  ENCFF744FQG  bed.gz
+Human.Erythroid.JUND.pv ENCFF253NTK bigWig
+Mouse.Erythroid.JUND.pv ENCFF886PYK bigWig
+
+Human.Erythroid.MAFK.idr  ENCFF188OEK  bed.gz
+Mouse.Erythroid.MAFK.idr  ENCFF032BCM  bed.gz
+Human.Erythroid.MAFK.pv ENCFF408KTS bigWig
+Mouse.Erythroid.MAFK.pv ENCFF859RPY bigWig
+
+Human.Erythroid.MYC.idr  ENCFF664GSV  bed.gz
+Mouse.Erythroid.MYC.idr  ENCFF545TFJ  bed.gz
+Human.Erythroid.MYC.pv ENCFF140BXD bigWig
+Mouse.Erythroid.MYC.pv ENCFF944GOL bigWig
+
+Human.ESC.CTCF.idr   ENCFF497ZGV  bed.gz
+Mouse.ESC.CTCF.idr  ENCFF052KVO  bed.gz
+Human.ESC.CTCF.pv  ENCFF041TAK bigWig
+Mouse.ESC.CTCF.pv ENCFF989YLQ  bigWig
+
+Human.ESC.MAFK.idr  ENCFF711HUJ   bed.gz
+Mouse.ESC.MAFK.idr  ENCFF467JZV  bed.gz
+Human.ESC.MAFK.pv  ENCFF959KBD bigWig
+Mouse.ESC.MAFK.pv  ENCFF067OWO bigWig
+
+Human.ESC.NANOG.idr  ENCFF655XZF   bed.gz
+Mouse.ESC.NANOG.idr  ENCFF453HWF  bed.gz
+Human.ESC.NANOG.pv  ENCFF926YZX bigWig
+Mouse.ESC.NANOG.pv ENCFF608GQG  bigWig
+
+Human.ESC.POU5F1.idr  ENCFF870LRX   bed.gz
+Mouse.ESC.POU5F1.idr  ENCFF220HTM  bed.gz
+Human.ESC.POU5F1.pv  ENCFF003PEE bigWig
+Mouse.ESC.POU5F1.pv  ENCFF771NXF bigWig
+
+Mouse.liver.CTCF.idr  ENCSR000CBU  bed.gz
+Mouse.liver.CTCF.pv  ENCFF155SPJ bigWig
+
+Human.liver.RXRA.idr  ENCSR098XMN bed.gz
+Human.liver.RXRA.pv  ENCFF301XZS bigWig
+
+Human.Erythroid.chromatin.pv  ENCFF600FDO bigWig
+Mouse.Erythroid.chromatin.pv1 ENCFF145VWQ  bigWig
+Mouse.Erythroid.chromatin.pv2 ENCFF630ILP  bigWig
+Mouse.Erythroid.chromatin.pv3 ENCFF359CLY  bigWig
+
+Human.ESC.chromatin.pv1 ENCFF232GUZ  bigWig
+Human.ESC.chromatin.pv2 ENCFF492ENM  bigWig
+Mouse.ESC.chromatin.pv1 ENCFF672DJH  bigWig
+Mouse.ESC.chromatin.pv2 ENCFF962TCT  bigWig
+
+Human.Lymphoblast.chromatin.pv ENCFF180ZAY  bigWig
+Mouse.Lymphoblast.chromatin.pv1 ENCFF228LWM  bigWig
+Mouse.Lymphoblast.chromatin.pv2 ENCFF315JOG  bigWig
+
+Human.liver.chromatin.pv ENCFF435JGG  bigWig
+Mouse.liver.chromatin.pv1 ENCFF982MGZ  bigWig
+Mouse.liver.chromatin.pv2 ENCFF947ZHU  bigWig
