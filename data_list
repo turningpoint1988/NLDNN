@@ -1,0 +1,76 @@
+Human.Lymphoblast.BHLHE40.pv  ENCFF325FDI   bigWig
+Mouse.Lymphoblast.BHLHE40.pv  ENCFF229EVK  bigWig
+
+Human.Lymphoblast.CTCF.pv  ENCFF637RGD  bigWig
+Mouse.Lymphoblast.CTCF.pv  ENCFF255NVD  bigWig
+
+Human.Lymphoblast.E2F4.pv  ENCFF337MYH   bigWig
+Mouse.Lymphoblast.E2F4.pv  ENCFF244CAE  bigWig
+
+Human.Lymphoblast.JUND.pv  ENCFF948QYK   bigWig
+Mouse.Lymphoblast.JUND.pv  ENCFF084GYC  bigWig
+
+Human.Lymphoblast.MYC.pv  ENCFF829AJS   bigWig
+Mouse.Lymphoblast.MYC.pv  ENCFF901VFB  bigWig
+
+Human.Erythroid.BHLHE40.pv  ENCFF110ZZE bigWig
+Mouse.Erythroid.BHLHE40.pv  ENCFF414CZA bigWig
+
+Human.Erythroid.CTCF.pv ENCFF268ZPN bigWig
+Mouse.Erythroid.CTCF.pv ENCFF852JDS bigWig
+
+Human.Erythroid.E2F4.pv  ENCFF172BRS bigWig
+Mouse.Erythroid.E2F4.pv  ENCFF927MMJ bigWig
+
+Human.Erythroid.GATA1.pv ENCFF331URE bigWig
+Mouse.Erythroid.GATA1.pv ENCFF222HZM bigWig
+
+Human.Erythroid.JUND.pv ENCFF253NTK bigWig
+Mouse.Erythroid.JUND.pv ENCFF886PYK bigWig
+
+Human.Erythroid.MAFK.pv ENCFF408KTS bigWig
+Mouse.Erythroid.MAFK.pv ENCFF859RPY bigWig
+
+Human.Erythroid.MYC.pv ENCFF140BXD bigWig
+Mouse.Erythroid.MYC.pv ENCFF944GOL bigWig
+
+Human.ESC.CTCF.pv  ENCFF041TAK bigWig
+Mouse.ESC.CTCF.pv ENCFF989YLQ  bigWig
+
+Human.ESC.MAFK.pv  ENCFF959KBD bigWig
+Mouse.ESC.MAFK.pv  ENCFF067OWO bigWig
+
+Human.ESC.NANOG.pv  ENCFF926YZX bigWig
+Mouse.ESC.NANOG.pv ENCFF608GQG  bigWig
+
+Human.ESC.POU5F1.pv  ENCFF003PEE bigWig
+Mouse.ESC.POU5F1.pv  ENCFF771NXF bigWig
+
+Mouse.liver.CTCF.pv  ENCFF155SPJ bigWig
+
+Human.liver.RXRA.pv  ENCFF301XZS bigWig
+
+Human.Lymphoblast.BHLHE40.bam1  ENCFF947HBR   bam
+Human.Lymphoblast.BHLHE40.bam2  ENCFF594ZIL bam
+Mouse.Lymphoblast.BHLHE40.bam1  ENCFF790ILK  bam
+Mouse.Lymphoblast.BHLHE40.bam2 ENCFF554ITA  bam
+
+Human.Lymphoblast.CTCF.bam1  ENCFF747TJH   bam
+Human.Lymphoblast.CTCF.bam2  ENCFF876QCV bam
+Mouse.Lymphoblast.CTCF.bam1  ENCFF955ZYH  bam
+Mouse.Lymphoblast.CTCF.bam2  ENCFF238KIK bam
+
+Human.Lymphoblast.E2F4.bam1  ENCFF182QPN   bam
+Human.Lymphoblast.E2F4.bam2 ENCFF053HZD  bam
+Mouse.Lymphoblast.E2F4.bam1  ENCFF272MBJ  bam
+Mouse.Lymphoblast.E2F4.bam2  ENCFF758UEB bam
+
+Human.Lymphoblast.JUND.bam1  ENCFF078GJW   bam
+Human.Lymphoblast.JUND.bam2 ENCFF891HXN  bam
+Mouse.Lymphoblast.JUND.bam1  ENCFF194KVS  bam
+Mouse.Lymphoblast.JUND.bam2  ENCFF030HER bam
+
+Human.Lymphoblast.MYC.bam1  ENCFF513EOH   bam
+Human.Lymphoblast.MYC.bam2 ENCFF484MUV  bam
+Mouse.Lymphoblast.MYC.bam1  ENCFF657DZE  bam
+Mouse.Lymphoblast.MYC.bam2  ENCFF124MHL bam
