@@ -13,10 +13,17 @@ Fig.1 The flowchart of our proposed method (NLDNN-AT).
 
 ## Prerequisites and Dependencies
 
-- Pytorch 1.1 [[Install]](https://pytorch.org/)
-- CUDA 9.0
-- Python 3.6
+- Pytorch 1.7 [[Install]](https://pytorch.org/)
+- CUDA 9.2
+- Python 3.6.13
 - Python packages: biopython, scikit-learn, pyBigWig, h5py, scipy, pandas, matplotlib, seaborn
+
+Install by runing:
+
+```
+pip install -r requirements.txt
+conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=9.2 -c pytorch
+```
 
 ## Other Tools
 
