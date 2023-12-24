@@ -188,14 +188,14 @@ Although NLDNN is trained using DNA sequences of length 600bp, it can accept inp
 bash plot.sh
 ```
 
-An example of the contributions and ISSM values of a peak from a human genomic region (chr1:117600000-117700000, 100kb) is displayed as follows:
+An example of the contribution and ISSM values of a peak from a human genomic region (chr1:117600000-117700000, 100kb) is displayed as follows:
 
 <p align="center"> 
 <img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/Contrib.ISSM.jpg>
 </p>
 
 
-An example of predictions of a human genomic region (chr1:15600000-15700000, 100kb) is displayed as follows:
+An example of the predictions of a human genomic region (chr1:15600000-15700000, 100kb) is displayed as follows:
 
 <p align="center"> 
 <img src=https://github.com/turningpoint1988/NLDNN/blob/main/Pictures/prediction.jpg>
