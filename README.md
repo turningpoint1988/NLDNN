@@ -52,7 +52,7 @@ You can download related ChIP-seq TF binding datasets using the following shell 
 bash download.sh
 ```
 
-After these are finished, you can run the following shell script to prepare TF binding data.
+After finished, you can run the following shell script to prepare TF binding data.
 
 ```
 bash annotate.sh
