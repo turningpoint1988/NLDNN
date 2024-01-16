@@ -1,4 +1,4 @@
-"""Params for ADDA."""
+"""Params for NLDNN-AT."""
 import torch
 import os.path as osp
 
